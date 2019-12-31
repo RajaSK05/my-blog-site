@@ -1,21 +1,50 @@
 import React from "react"
-import { Link } from "gatsby"
+import { useStaticQuery } from "gatsby"
 
 import Layout from "../components/layout"
-import Image from "../components/image"
 import SEO from "../components/seo"
+import Hero from "../components/hero"
+import PostsInIndex from "../components/posts-in-index"
 
-const IndexPage = () => (
-  <Layout>
-    <SEO title="Home" />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <p>Now go build something great.</p>
-    <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-      <Image />
-    </div>
-    <Link to="/page-2/">Go to page 2</Link>
-  </Layout>
-)
+const IndexPage = () => {
+  const { image, blogsImage } = useStaticQuery(graphql`
+    query {
+      image: file(relativePath: { eq: "about.jpg" }) {
+        sharp: childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      blogsImage: file(relativePath: { eq: "main-bg.jpg" }) {
+        sharp: childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+    }
+  `)
 
+  return (
+    <Layout pageTitle="About Me" imageFluid={image.sharp.fluid}>
+      <SEO title="Home" />
+      <div className="container">
+        <p style={{ fontSize: `20px` }}>
+          Hi... I'm <b>Raja SK</b>, working as a front-end developer at Zoho
+          Corporation, Chennai.
+          <br />
+          <br />
+          Nothing to say much... Let's get into work...
+        </p>
+      </div>
+      <Hero
+        pageTitle="Blogs"
+        imageFluid={blogsImage.sharp.fluid}
+        waveBottom={true}
+      />
+      <PostsInIndex />
+    </Layout>
+  )
+}
 export default IndexPage

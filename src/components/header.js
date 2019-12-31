@@ -1,35 +1,30 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import "../styles/header.scss"
+import Hero from "./hero"
 
-const Header = ({ siteTitle }) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
+const Header = ({ siteTitle, pageTitle, imageFluid }) => {
+  
+  return (
+    <>
+      <nav>
+        <Link to="/" className="heading">
+          Raja SK
         </Link>
-      </h1>
-    </div>
-  </header>
-)
+        <div className="nav-group">
+          <Link to="/blogs" className="nav-link" activeClassName="active">
+            Blogs
+          </Link>
+          <Link to="/contact" className="nav-link" activeClassName="active">
+            Contact
+          </Link>
+        </div>
+      </nav>
+      <Hero pageTitle={pageTitle} imageFluid={imageFluid}/>
+    </>
+  )
+}
 
 Header.propTypes = {
   siteTitle: PropTypes.string,

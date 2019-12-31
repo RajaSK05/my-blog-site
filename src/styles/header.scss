@@ -1,0 +1,34 @@
+
+header {
+  min-height: 350px;
+}
+
+nav {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: #ffbf00;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+
+  .heading {
+    font-size: 20px;
+  }
+  .nav-group {
+    .nav-link {
+      margin: 0 1.5rem 0 0;
+      text-decoration: none;
+      color: #6b5000;
+
+      &:hover, &.active {
+        color: #222;
+        border-bottom: 2px solid #222;
+      }
+
+      &:last-of-type {
+        margin: 0;
+      }
+    }
+  }
+}
